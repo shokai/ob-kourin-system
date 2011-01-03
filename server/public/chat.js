@@ -17,7 +17,7 @@ $(function(){
 var data;
 
 function post(){
-    chat.post();
+    chat.post($('input#name').val(), $('input#message').val());
     $('input#message').val('');
 };
 
@@ -34,10 +34,13 @@ function display(){
 };
 
 function Chat(){
-    this.post = function(){
+    this.post = function(name, message){
+        if(name == null || message == null || name.length < 1 || message.length < 1){
+            return;
+        }
         post_data = new Object();
-        post_data.name = $('input#name').val();
-        post_data.message = $('input#message').val();
+        post_data.name = name;
+        post_data.message = message;
         $.post(api, post_data, function(res){
             if(res.error == null){
                 data = res;
