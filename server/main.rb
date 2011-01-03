@@ -39,14 +39,15 @@ get '/chat.json' do
 end
 
 post '/chat.json' do
+  addr = env['REMOTE_ADDR']
   m = params[:message]
   name = params[:name]
-  if m.to_s.size < 1 or name.to_s.size < 1
+  if addr.to_s.size < 1 or m.to_s.size < 1 or name.to_s.size < 1
     status 500
     @mes = {:error => 'param "name" and "message" required'}.to_json
   else
     time = Time.now.to_i
-    c = Chat.new(:name => name, :message => m, :time => time)
+    c = Chat.new(:name => name, :message => m, :time => time, :addr => addr)
     c.save
     res = {
       :chats => recent_chats,

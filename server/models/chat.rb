@@ -3,4 +3,5 @@ class Chat
   field :message
   field :name
   field :time, :type => Integer
+  field :addr
 end
