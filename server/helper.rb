@@ -1,0 +1,8 @@
+require 'rubygems'
+require 'bundler/setup'
+require 'rack'
+require 'sinatra/reloader'
+require 'bson'
+require 'mongoid'
+gem 'mongoid','2.0.0.beta.20'
+require File.dirname(__FILE__)+'/models/chat'

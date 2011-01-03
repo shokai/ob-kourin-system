@@ -10,6 +10,12 @@ rescue => e
   STDERR.puts e
 end
 
+before do
+  Mongoid.configure{|conf|
+    conf.master = Mongo::Connection.new(@@conf['mongo_server'], @@conf['mongo_port']).db(@@conf['mongo_dbname'])
+  }
+end
+
 def app_root
   "#{env['rack.url_scheme']}://#{env['HTTP_HOST']}#{env['SCRIPT_NAME']}"
 end
@@ -19,3 +25,33 @@ get '/' do
   haml :index
 end
 
+def recent_chats(limit=20)
+  return @recent_chats if @recent_chats
+  @recent_chats = Chat.find(:all, :limit => limit).desc(:time)
+end
+
+get '/chat.json' do
+  res = {
+    :chats => recent_chats,
+    :count => recent_chats.count
+  }
+  @mes = res.to_json
+end
+
+post '/chat.json' do
+  m = params[:message]
+  name = params[:name]
+  if m.to_s.size < 1 or name.to_s.size < 1
+    status 500
+    @mes = {:error => 'param "name" and "message" required'}.to_json
+  else
+    time = Time.now.to_i
+    c = Chat.new(:name => name, :message => m, :time => time)
+    c.save
+    res = {
+      :chats => recent_chats,
+      :count => recent_chats.count
+    }
+    @mes = res.to_json
+  end
+end
