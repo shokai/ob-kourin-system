@@ -1,16 +1,25 @@
 
 var chat = new Chat();
 var timer_sync;
+var KC = {tab:9, enter:13, left:37, up:38, right:39, down:40};
+
 $(function(){
     chat.load();
-    $('input#post').click(function(){
-        chat.post();
-        $('input#message').val('');
+    $('input#post').click(post);
+    $('input#message').keydown(function(e){
+        if(e.keyCode == KC.enter){
+            post();
+        }
     });
     timer_sync = setInterval(chat.load, 10000);
 });
 
 var data;
+
+function post(){
+    chat.post();
+    $('input#message').val('');
+};
 
 function display(){
     if(data == null || data.chats.length < 1) return;
