@@ -8,6 +8,6 @@ require File.dirname(__FILE__)+'/main'
 set :environment, :development
 
 set :port, 8100
-set :server, 'webrick'
+set :server, 'thin'
 
 Sinatra::Application.run
