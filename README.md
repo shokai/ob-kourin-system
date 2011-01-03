@@ -4,8 +4,9 @@ OB降臨システム webサービス
 Dependencies
 ------------
 
-* sinatra
-* [saykana](http://www.a-quest.com/quickware/saykana/)
+* Sinatra
+* Mongo DB
+* [mac-say-server](https://github.com/shokai/mac-say-server)
 
 
 Run Server
