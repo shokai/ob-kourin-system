@@ -2,6 +2,7 @@
 var chat = new Chat();
 var timer_sync;
 var KC = {tab:9, enter:13, left:37, up:38, right:39, down:40};
+var data;
 
 $(function(){
     var name = $.cookie('name')
@@ -17,8 +18,6 @@ $(function(){
     });
     timer_sync = setInterval(chat.load, 10000);
 });
-
-var data;
 
 function post(){
     var name = $('input#name').val();
