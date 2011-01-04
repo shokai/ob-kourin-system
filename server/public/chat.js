@@ -36,11 +36,15 @@ function display(){
     for(var i = 0; i < data.chats.length; i++){
         c = data.chats[i];
         li = $('<li />').addClass('chat');
+        span = $('<span />').addClass('chat')
         if(c.local) li.addClass('local');
-        else li.addClass('grobal').prepend('[OB] ');
-        li.append(c.name+' : '+c.message);
-        if(c.name.match("^[a-zA-Z0-9_]+$")) li.prepend('<img src="http://gadgtwit.appspot.com/twicon/'+c.name+'" />');
-        console.log(c.user_id);
+        else{
+            li.addClass('grobal');
+            span.prepend('[OB] ');
+        }
+        span.append(c.name+' : '+c.message);
+        if(c.name.match("^[a-zA-Z0-9_]+$")) li.prepend('<img src="http://gadgtwit.appspot.com/twicon/'+c.name+'" width="48" height="48" />');
+        li.append(span)
         ul.append(li);
     }
     div.html('');

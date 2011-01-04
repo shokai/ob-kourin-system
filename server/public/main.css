@@ -1,17 +1,21 @@
 
-
-h1{
-    font-size : 20pt;
-}
-
-div#all{
-    text-align : center;
-    margin : 0px;
+body{
+    background-color : #333;
 }
 
 div#content{
-    width : 600px;
-    margin : 20px;
+    margin : auto;
+    padding-top : 20px;
+    width : 800px;
+    background-color : #FFF;
+}
+
+div#head{
+    text-align : center;
+}
+
+h1{
+    font-size : 20pt;
 }
 
 div#chat{
@@ -27,6 +31,10 @@ li.chat{
     padding : 5px;
     height : 60px;
     font-size : 15pt;
+}
+
+span.chat{
+    margin-left : 5px;
 }
 
 li.local{

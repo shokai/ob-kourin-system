@@ -11,8 +11,8 @@
     %script{:type => 'text/javascript', :src => "#{app_root}/jquery.cookie.js"}
     %script{:type => 'text/javascript', :src => "#{app_root}/chat.js"}
   %body
-    %div#all
-      %div#content
+    %div#content
+      %div#head
         %h1= @title
         %form
           名前
@@ -20,4 +20,4 @@
           ： 
           %input{:type => 'text', :id => 'message', :size => 50, :value => 'きゃべつ'}
           %input{:type => 'button', :id => 'post', :value => '送信'}
-        %div#chat
+      %div#chat
