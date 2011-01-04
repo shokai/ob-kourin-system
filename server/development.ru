@@ -5,7 +5,7 @@ require File.dirname(__FILE__)+'/main'
 
 set :environment, :development
 
-set :port, 8100
+set :port, 8101
 set :server, 'thin'
 
 Sinatra::Application.run
