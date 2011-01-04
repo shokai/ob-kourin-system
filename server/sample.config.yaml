@@ -3,4 +3,7 @@ mongo_server : '127.0.0.1'
 mongo_port : 27017
 mongo_dbname : 'ob-web-app'
 
+# say setting
 local_ipaddr : '^(192\.168\.1\.\d+)$'
+say_api : 'http://localhost:8100/say'
+
