@@ -7,6 +7,7 @@
     :javascript
       var api = "#{app_root}/chat.json"
     %script{:type => 'text/javascript', :src => "#{app_root}/jquery.js"}
+    %script{:type => 'text/javascript', :src => "#{app_root}/jquery.cookie.js"}
     %script{:type => 'text/javascript', :src => "#{app_root}/chat.js"}
   %body
     %h1= @title

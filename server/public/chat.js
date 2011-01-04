@@ -4,6 +4,10 @@ var timer_sync;
 var KC = {tab:9, enter:13, left:37, up:38, right:39, down:40};
 
 $(function(){
+    var name = $.cookie('name')
+    if(name != null && name.length > 0){
+        $('input#name').val(name);
+    }
     chat.load();
     $('input#post').click(post);
     $('input#message').keydown(function(e){
@@ -17,8 +21,12 @@ $(function(){
 var data;
 
 function post(){
-    chat.post($('input#name').val(), $('input#message').val());
-    $('input#message').val('');
+    var name = $('input#name').val();
+    if(name.length > 0){
+        $.cookie('name', name);
+        chat.post(name, $('input#message').val());
+        $('input#message').val('');
+    }
 };
 
 function display(){
