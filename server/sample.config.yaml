@@ -7,3 +7,5 @@ mongo_dbname : 'ob-web-app'
 local_ipaddr : '^(192\.168\.1\.\d+)$'
 say_api : 'http://localhost:8100/say'
 
+# camera
+camera_file : 'camera.jpg'

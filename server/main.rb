@@ -52,3 +52,24 @@ post '/chat.json' do
     @mes = res.to_json
   end
 end
+
+get '/camera' do
+  redirect "#{app_root}/#{@@conf['camera_file']}"
+end
+
+post '/camera' do
+  if !params[:file]
+    @mes = {:error => 'error'}.to_json
+  else
+    name = File.dirname(__FILE__)+'/public/'+@@conf['camera_file']
+    File.open(name, 'wb'){|f|
+      f.write params[:file][:tempfile].read
+    }
+    if File::exists? name
+      @mes = {
+        :url => "#{app_root}/#{@@conf['camera_file']}",
+        :size => File.size(name)
+      }.to_json
+    end
+  end
+end
