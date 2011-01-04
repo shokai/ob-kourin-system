@@ -37,7 +37,7 @@ function display(){
         c = data.chats[i];
         li = $('<li />').addClass('chat');
         if(c.local) li.addClass('local');
-        else li.addClass('grobal');
+        else li.addClass('grobal').prepend('[OB] ');
         li.append(c.name+' : '+c.message);
         if(c.name.match("^[a-zA-Z0-9_]+$")) li.prepend('<img src="http://gadgtwit.appspot.com/twicon/'+c.name+'" />');
         ul.append(li);
