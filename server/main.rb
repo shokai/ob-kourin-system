@@ -25,7 +25,7 @@ get '/' do
   haml :index
 end
 
-def recent_chats(limit=20)
+def recent_chats(limit=40)
   return @recent_chats if @recent_chats
   @recent_chats = Chat.find(:all, :limit => limit).desc(:time).map{|i|i.to_hash}
 end
