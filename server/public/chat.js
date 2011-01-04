@@ -47,8 +47,7 @@ function display(){
         ul.append(li);
     }
     div.html('');
-    div.append(ul);
-    
+    div.append(ul);    
 };
 
 function Chat(){
@@ -60,7 +59,7 @@ function Chat(){
         post_data.name = name;
         post_data.message = message;
         $.post(api, post_data, function(res){
-            if(res.error == null){
+            if(res.error == null && (data == null || res.last != data.last)){
                 data = res;
                 display();
             }
@@ -69,7 +68,7 @@ function Chat(){
     
     this.load = function(on_load_func){
         $.getJSON(api, function(res){
-            if(res.error == null){
+            if(res.error == null && (data == null || res.last != data.last)){
                 data = res;
                 display();
                 if(on_load_func){
