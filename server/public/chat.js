@@ -32,13 +32,23 @@ function post(){
 function display(){
     if(data == null || data.chats.length < 1) return;
     div = $('div#chat');
-    div.html('');
+    ul = $('<ul></ul>')
     for(var i = 0; i < data.chats.length; i++){
         c = data.chats[i];
-        div.append('<ul>');
-        div.append('<li>'+c.name+' : '+c.message+'</li>');
-        div.append('</ul>');
+        li = $('<li></li>').addClass('chat');
+        if(c.local){
+            li.addClass('local');
+        }
+        else{
+            li.addClass('grobal');
+        }
+        li.append(c.name+' : '+c.message);
+        if(c.name.match("^[a-zA-Z0-9_]+$")) li.prepend('<img src="http://gadgtwit.appspot.com/twicon/'+c.name+'" />');
+        ul.append(li);
     }
+    div.html('');
+    div.append(ul);
+    
 };
 
 function Chat(){

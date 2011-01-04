@@ -2,19 +2,22 @@
 %html
   %head
     %title= @title
-    %link{:rel => 'stylesheet', :src => "#{app_root}/reset-3.1.1.css"}
-    %link{:rel => 'stylesheet', :src => "#{app_root}/fonts-3.1.1.css"}
+    %link{:rel => 'stylesheet', :href => "#{app_root}/reset-3.1.1.css", :type => 'text/css'}
+    %link{:rel => 'stylesheet', :href => "#{app_root}/fonts-3.1.1.css", :type => 'text/css'}
+    %link{:rel => 'stylesheet', :href => "#{app_root}/main.css", :type => 'text/css'}
     :javascript
       var api = "#{app_root}/chat.json"
     %script{:type => 'text/javascript', :src => "#{app_root}/jquery.js"}
     %script{:type => 'text/javascript', :src => "#{app_root}/jquery.cookie.js"}
     %script{:type => 'text/javascript', :src => "#{app_root}/chat.js"}
   %body
-    %h1= @title
-    %form
-      名前
-      %input{:type => 'text', :id => 'name', :size => 10, :value => 'おなまえ'}
-      ： 
-      %input{:type => 'text', :id => 'message', :size => 100, :value => 'きゃべつ'}
-      %input{:type => 'button', :id => 'post', :value => '送信'}
-    %div#chat
+    %div#all
+      %div#content
+        %h1= @title
+        %form
+          名前
+          %input{:type => 'text', :id => 'name', :size => 10, :value => 'おなまえ'}
+          ： 
+          %input{:type => 'text', :id => 'message', :size => 50, :value => 'きゃべつ'}
+          %input{:type => 'button', :id => 'post', :value => '送信'}
+        %div#chat

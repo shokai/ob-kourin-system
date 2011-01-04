@@ -1,0 +1,31 @@
+
+
+h1{
+    font-size : 20pt;
+}
+
+div#all{
+    text-align : center;
+    margin : 0px;
+}
+
+div#content{
+    width : 600px;
+    margin : 20px;
+}
+
+ul.chat{
+    width : 100%;
+}
+
+li.chat{
+    font-size : 15pt;
+}
+
+li.local{
+    text-align : right;
+}
+
+li.grobal{
+    text-align : left;
+}

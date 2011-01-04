@@ -34,7 +34,8 @@ get '/chat.json' do
   content_type 'application/json'
   res = {
     :chats => recent_chats,
-    :count => recent_chats.count
+    :count => recent_chats.count,
+    :last => recent_chats[0][:time]
   }
   @mes = res.to_json
 end
@@ -53,7 +54,8 @@ post '/chat.json' do
     c.save
     res = {
       :chats => recent_chats,
-      :count => recent_chats.count
+      :count => recent_chats.count,
+      :last => recent_chats[0][:time]
     }
     @mes = res.to_json
   end
