@@ -32,10 +32,10 @@ function post(){
 function display(){
     if(data == null || data.chats.length < 1) return;
     div = $('div#chat');
-    ul = $('<ul></ul>')
+    ul = $('<ul />')
     for(var i = 0; i < data.chats.length; i++){
         c = data.chats[i];
-        li = $('<li></li>').addClass('chat');
+        li = $('<li />').addClass('chat');
         if(c.local) li.addClass('local');
         else li.addClass('grobal');
         li.append(c.name+' : '+c.message);
