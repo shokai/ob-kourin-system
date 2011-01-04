@@ -36,6 +36,12 @@ span.chat{
     margin-left : 5px;
 }
 
+span.time{
+    font-size : smaller;
+    color : #666;
+    margin-left : 5px;
+}
+
 li.local{
     text-align : left;
 }

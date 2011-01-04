@@ -36,3 +36,14 @@ String.prototype.htmlEscape = function(){
     txt.data = this;
     return span.innerHTML;
 };
+
+var timeDiff = function(time_a, time_b){
+    if(time_a > time_b) d = time_a - time_b;
+    else d = time_b - time_a;
+    if(d > 2678400) return '約'+Math.floor(d/2678400)+'ヶ月前';
+    else if(d > 86400) return Math.floor(d/86400)+'日前';
+    else if(d > 3600) return Math.floor(d/3600)+'時間前';
+    else if(d > 60) return Math.floor(d/60)+'分前';
+    else if(d > 0) return Math.floor(d)+'秒前';
+    else return "";
+}

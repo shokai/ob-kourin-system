@@ -32,6 +32,8 @@ function display(){
     if(data == null || data.chats.length < 1) return;
     div = $('div#chat');
     ul = $('<ul />');
+    now = Math.floor(new Date().getTime()/1000);
+    
     for(var i = 0; i < data.chats.length; i++){
         c = data.chats[i];
         li = $('<li />').addClass('chat');
@@ -45,6 +47,8 @@ function display(){
         span.append(tmp.htmlEscape());
         if(c.name.match("^[a-zA-Z0-9_]+$")) li.prepend('<img src="http://gadgtwit.appspot.com/twicon/'+c.name+'" width="48" height="48" />');
         li.append(span)
+        span_t = $('<span />').addClass('time').append(timeDiff(now, c.time));
+        li.append(span_t);
         ul.append(li);
     }
     div.html('');
