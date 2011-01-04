@@ -1,14 +1,5 @@
 #!/usr/bin/env ruby
 # -*- coding: utf-8 -*-
-require 'yaml'
-
-begin
-  @@conf = YAML::load open(File.dirname(__FILE__)+'/config.yaml').read
-  p @@conf
-rescue => e
-  STDERR.puts 'config.yaml load error!'
-  STDERR.puts e
-end
 
 before do
   Mongoid.configure{|conf|
