@@ -31,6 +31,7 @@ def recent_chats(limit=20)
 end
 
 get '/chat.json' do
+  content_type 'application/json'
   res = {
     :chats => recent_chats,
     :count => recent_chats.count
@@ -39,6 +40,7 @@ get '/chat.json' do
 end
 
 post '/chat.json' do
+  content_type 'application/json'
   addr = env['REMOTE_ADDR']
   m = params[:message]
   name = params[:name]
