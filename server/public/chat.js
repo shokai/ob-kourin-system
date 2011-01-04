@@ -32,7 +32,7 @@ function post(){
 function display(){
     if(data == null || data.chats.length < 1) return;
     div = $('div#chat');
-    ul = $('<ul />')
+    ul = $('<ul />');
     for(var i = 0; i < data.chats.length; i++){
         c = data.chats[i];
         li = $('<li />').addClass('chat');
