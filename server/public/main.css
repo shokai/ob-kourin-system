@@ -18,6 +18,10 @@ h1{
     font-size : 20pt;
 }
 
+form#chat{
+
+}
+
 div#chat{
     margin : 10px;
 }

@@ -15,10 +15,10 @@
     %div#content
       %div#head
         %h1= @title
-        %form
+        %form#chat
           名前
           %input{:type => 'text', :id => 'name', :size => 10, :value => 'おなまえ'}
-          ： 
+          ：
           %input{:type => 'text', :id => 'message', :size => 50, :value => 'きゃべつ'}
           %input{:type => 'button', :id => 'post', :value => '送信'}
       %div#chat

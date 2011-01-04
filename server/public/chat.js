@@ -16,7 +16,7 @@ $(function(){
             post();
         }
     });
-    timer_sync = setInterval(chat.load, 10000);
+    timer_sync = setInterval(chat.load, 20000);
 });
 
 function post(){
@@ -43,8 +43,9 @@ function display(){
             li.addClass('grobal');
             span.prepend('[OB] ');
         }
-        tmp = c.name+' : '+c.message;
-        span.append(tmp.htmlEscape());
+        tmp = c.name.htmlEscape()+' : ';
+        tmp += c.message.htmlEscape().replace_all(/(https?\:[\w\.\~\-\/\?\&\+\=\:\@\%\;\#\%]+)/, '<a href="$1">$1</a>');
+        span.append(tmp);
         if(c.name.match("^[a-zA-Z0-9_]+$")) li.prepend('<img src="http://gadgtwit.appspot.com/twicon/'+c.name+'" width="48" height="48" />');
         li.append(span)
         span_t = $('<span />').addClass('time').append(timeDiff(now, c.time));
