@@ -14,16 +14,23 @@ div#content{
     margin : 20px;
 }
 
+div#chat{
+    margin : 10px;
+}
+
 ul.chat{
     width : 100%;
 }
 
 li.chat{
+    vertical-align : bottom;
+    padding : 5px;
+    height : 60px;
     font-size : 15pt;
 }
 
 li.local{
-    text-align : right;
+    text-align : left;
 }
 
 li.grobal{

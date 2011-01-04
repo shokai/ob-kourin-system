@@ -40,6 +40,7 @@ function display(){
         else li.addClass('grobal').prepend('[OB] ');
         li.append(c.name+' : '+c.message);
         if(c.name.match("^[a-zA-Z0-9_]+$")) li.prepend('<img src="http://gadgtwit.appspot.com/twicon/'+c.name+'" />');
+        console.log(c.user_id);
         ul.append(li);
     }
     div.html('');
