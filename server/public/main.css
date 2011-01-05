@@ -4,8 +4,8 @@ body{
 }
 
 div#content{
-    margin : auto;
     padding-top : 20px;
+    margin-left : 20px;
     width : 800px;
     background-color : #FFF;
 }
@@ -24,6 +24,17 @@ form#chat{
 
 div#chat{
     margin : 10px;
+}
+
+div#robot{
+    position: fixed;
+    top: 100px;
+    left: 830px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    background-color : #FFF;
 }
 
 ul.chat{

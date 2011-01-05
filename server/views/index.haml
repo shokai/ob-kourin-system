@@ -6,7 +6,8 @@
     %link{:rel => 'stylesheet', :href => "#{app_root}/fonts-3.1.1.css", :type => 'text/css'}
     %link{:rel => 'stylesheet', :href => "#{app_root}/main.css", :type => 'text/css'}
     :javascript
-      var api = "#{app_root}/chat.json"
+      var api = "#{app_root}/chat.json";
+      var camera_url = "#{camera_url}";
     %script{:type => 'text/javascript', :src => "#{app_root}/jquery.js"}
     %script{:type => 'text/javascript', :src => "#{app_root}/jquery.cookie.js"}
     %script{:type => 'text/javascript', :src => "#{app_root}/util.js"}
@@ -22,3 +23,6 @@
           %input{:type => 'text', :id => 'message', :size => 50, :value => 'きゃべつ'}
           %input{:type => 'button', :id => 'post', :value => '送信'}
       %div#chat
+      %div#robot
+        %div#camera
+          %img{:src => camera_url, :width => 240, :height => 320}
