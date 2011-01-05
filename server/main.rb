@@ -71,6 +71,7 @@ post '/camera' do
       f.write params[:file][:tempfile].read
     }
     if File.exists? tmp
+      FileUtils.chmod(0755, tmp)
       if File.exists? name
         File.delete(name)
       end
