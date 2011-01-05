@@ -35,7 +35,7 @@ end
 
 f = params[:file]
 unless File.exists? f
-  STDERR.puts 'file not exists'
+  STDERR.puts 'upload file not exists'
   exit 1
 end
 
@@ -51,6 +51,7 @@ loop do
     end
     puts "[#{last_mtime}] #{url}" if url
   end
+  break unless params[:loop]
   sleep params[:interval].to_i
 end
 
