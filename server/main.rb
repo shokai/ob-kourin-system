@@ -65,11 +65,16 @@ post '/camera' do
   if !params[:file]
     @mes = {:error => 'error'}.to_json
   else
+    tmp = File.dirname(__FILE__)+'/public/tmp.jpg'
     name = File.dirname(__FILE__)+'/public/'+@@conf['camera_file']
-    File.open(name, 'wb'){|f|
+    File.open(tmp, 'wb'){|f|
       f.write params[:file][:tempfile].read
     }
-    if File::exists? name
+    if File.exists? tmp
+      if File.exists? name
+        File.delete(name)
+      end
+      File.rename(tmp, name)
       @mes = {
         :url => camera_url,
         :size => File.size(name)
