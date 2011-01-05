@@ -1,6 +1,7 @@
 
 var chat = new Chat();
 var timer_sync;
+var timer_camera;
 var KC = {tab:9, enter:13, left:37, up:38, right:39, down:40};
 var data;
 
@@ -17,7 +18,14 @@ $(function(){
         }
     });
     timer_sync = setInterval(chat.load, 20000);
+    timer_camera = setInterval(reload_camera, 5000);
 });
+
+function reload_camera(){
+    div = $('div#camera');
+    img = $('<img src="'+camera_url+'?time='+new Date().getTime()+'" width="240" height="320">')
+    div.html(img);
+};
 
 function post(){
     var name = $('input#name').val();
