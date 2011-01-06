@@ -83,3 +83,17 @@ post '/camera' do
     end
   end
 end
+
+post '/robot' do
+  puts m = params[:message]
+  require 'socket'
+  begin
+    s = TCPSocket.open('127.0.0.1', 8782)
+    s.puts m
+  rescue => e
+    STDERR.puts e
+  end
+  @mes = {
+    :message => m
+  }.to_json
+end
