@@ -12,7 +12,7 @@ def app_root
 end
 
 def camera_url
-  "#{app_root}/#{@@conf['camera_file']}"
+  "#{app_root}/camera"
 end
 
 get '/' do
@@ -58,24 +58,24 @@ post '/chat.json' do
 end
 
 get '/camera' do
-  redirect camera_url
+  last = Dir.glob(File.dirname(__FILE__)+'/'+@@conf['camera_dir']+'/*.jpg').sort{|a,b|
+    a.to_i <=> b.to_i
+  }.last
+  content_type 'image/jpg'
+  File.open(last)
 end
 
 post '/camera' do
   if !params[:file]
     @mes = {:error => 'error'}.to_json
   else
-    tmp = File.dirname(__FILE__)+'/public/tmp.jpg'
-    name = File.dirname(__FILE__)+'/public/'+@@conf['camera_file']
-    File.open(tmp, 'wb'){|f|
+    camera_dir = File.dirname(__FILE__)+'/'+@@conf['camera_dir']
+    Dir.mkdir(camera_dir) unless File.exists? camera_dir
+    name = "#{camera_dir}/#{Time.now.to_i}.jpg"
+    File.open(name, 'wb'){|f|
       f.write params[:file][:tempfile].read
     }
-    if File.exists? tmp
-      FileUtils.chmod(0755, tmp)
-      if File.exists? name
-        File.delete(name)
-      end
-      File.rename(tmp, name)
+    if File.exists? name
       @mes = {
         :url => camera_url,
         :size => File.size(name)
