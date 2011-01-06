@@ -2,6 +2,7 @@
 require 'rubygems'
 require 'yaml'
 require 'ArgsParser'
+require 'FileUtils'
 require File.dirname(__FILE__)+'/lib/upload_client'
 
 $KCODE = 'u'
@@ -43,8 +44,10 @@ last_mtime = 0
 loop do
   if File.mtime(f).to_i != last_mtime
     last_mtime = File.mtime(f).to_i
+    tmp_file = File.dirname(__FILE__)+'/tmp'
+    FileUtils.cp(f, tmp_file)
     begin
-      url = UploadClient::upload(f, conf['api'])
+      url = UploadClient::upload(tmp_file, conf['api'])
     rescue => e
       STDERR.puts e
       url = nil
