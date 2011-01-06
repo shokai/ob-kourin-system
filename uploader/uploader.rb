@@ -48,6 +48,9 @@ loop do
     rescue => e
       STDERR.puts e
       url = nil
+    rescue UploadError => e
+      STDERR.puts e
+      url = nil
     end
     puts "[#{last_mtime}] #{url}" if url
   end
