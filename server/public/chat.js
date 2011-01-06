@@ -19,12 +19,22 @@ $(function(){
     });
     timer_sync = setInterval(chat.load, 20000);
     timer_camera = setInterval(reload_camera, 5000);
+    $('div#robot span.button#go').click(function(){robot_post('a')});
+    $('div#robot span.button#left').click(function(){robot_post('c')});
+    $('div#robot span.button#right').click(function(){robot_post('d')});
+    $('div#robot span.button#back').click(function(){robot_post('b')});
 });
 
 function reload_camera(){
     div = $('div#camera');
     img = $('<img src="'+camera_url+'?time='+new Date().getTime()+'" width="240" height="320">')
     div.html(img);
+};
+
+function robot_post(message){
+    post_data = {'message' : message};
+    $.post(robot_api, post_data, function(res){
+    }, 'json');
 };
 
 function post(){

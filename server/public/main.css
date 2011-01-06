@@ -37,6 +37,43 @@ div#robot{
     background-color : #FFF;
 }
 
+div#camera{
+    margin : 5px;
+}
+
+div#controller{
+    margin : 5px;
+}
+
+div#controller div{
+    margin : 20px;
+}
+
+div#controller div#top{
+    text-align : center;
+}
+
+div#controller div#middle{
+    text-align : center;
+}
+
+div#controller div#bottom{
+    text-align : center;
+}
+
+div#controller span.button{
+    background-color : #FFF;
+    border-style : solid;
+    border-color : #000;
+    border-width : 1px;
+    padding : 10px;
+    font-size : 20pt;
+}
+
+span#go{
+    margin : auto;
+}
+
 ul.chat{
     width : 100%;
 }

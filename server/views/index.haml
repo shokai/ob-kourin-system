@@ -8,6 +8,7 @@
     :javascript
       var api = "#{app_root}/chat.json";
       var camera_url = "#{camera_url}";
+      var robot_api = "#{app_root}/robot";
     %script{:type => 'text/javascript', :src => "#{app_root}/jquery.js"}
     %script{:type => 'text/javascript', :src => "#{app_root}/jquery.cookie.js"}
     %script{:type => 'text/javascript', :src => "#{app_root}/util.js"}
@@ -26,3 +27,11 @@
       %div#robot
         %div#camera
           %img{:src => camera_url, :width => 240, :height => 320}
+        %div#controller
+          %div#top
+            %span.button#go ↑
+          %div#middle
+            %span.button#left ←
+            %span.button#right →
+          %div#bottom
+            %span.button#back ↓
