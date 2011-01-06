@@ -88,7 +88,7 @@ post '/robot' do
   puts m = params[:message]
   require 'socket'
   begin
-    s = TCPSocket.open('127.0.0.1', 8782)
+    s = TCPSocket.open(@@conf['robot_host'], @@conf['robot_port'])
     s.puts m
     s.close
   rescue => e
