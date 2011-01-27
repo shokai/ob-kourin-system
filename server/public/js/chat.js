@@ -30,7 +30,7 @@ $(function(){
 		$(this).css("cursor","default"); 
 	});
 
-    $('div#chat_paging').click(paging(++page_at));
+    //$('div#chat_paging').click(paging(++page_at));
     $('div#chat_paging').hover(function() {
 		$(this).css("cursor","pointer"); 
 	},function(){
@@ -89,7 +89,7 @@ function display(){
 
 function Chat(){
     
-    this.add_chat_data = function(new_data){
+    this.merge_chat_data = function(new_data){
         if(new_data.error != null) return;
         if(data == null){
             data = new_data;
@@ -97,10 +97,10 @@ function Chat(){
             return;
         }
         if(data.last != new_data.last){
-            for(var i = 0; i < new_data.length; i++){
+            for(var i = 0; i < new_data.chats.length; i++){
                 var c = new_data.chats[i];
                 var contains = false;
-                for(var j = 0; j < data.length; j++){
+                for(var j = 0; j < data.chats.length; j++){
                     if(data.chats[j].id == c.id){
                         contains = true;
                     }
@@ -122,13 +122,13 @@ function Chat(){
         post_data.name = name;
         post_data.message = message;
         $.post(api, post_data, function(res){
-            chat.add_chat_data(res);
+            chat.merge_chat_data(res);
         }, 'json');
     };
     
     this.load = function(){
         $.getJSON(api, function(res){
-            chat.add_chat_data(res);
+            chat.merge_chat_data(res);
         });
     };
 };
