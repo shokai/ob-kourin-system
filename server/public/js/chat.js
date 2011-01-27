@@ -4,6 +4,7 @@ var timer_sync;
 var timer_camera;
 var KC = {tab:9, enter:13, left:37, up:38, right:39, down:40};
 var data;
+var page_at = 1;
 
 $(function(){
     var name = $.cookie('name')
@@ -24,6 +25,13 @@ $(function(){
     $('div#robot span.button#right').click(function(){robot_post('d')});
     $('div#robot span.button#back').click(function(){robot_post('b')});
     $('div#robot span.button').hover(function() {
+		$(this).css("cursor","pointer"); 
+	},function(){
+		$(this).css("cursor","default"); 
+	});
+
+    $('div#chat_paging').click(paging(++page_at));
+    $('div#chat_paging').hover(function() {
 		$(this).css("cursor","pointer"); 
 	},function(){
 		$(this).css("cursor","default"); 
@@ -80,6 +88,25 @@ function display(){
 };
 
 function Chat(){
+    
+    this.add_chat_data = function(new_data){
+        if(new_data.error != null) return;
+        if(data == null){
+            data = new_data;
+            display();
+            return;
+        }
+        if(data.last < new_data.last){
+            for(var i = new_data.chats.length-1; i >= 0; i--){
+                c = new_data.chats[i];
+                if(c.time > data.last) data.chats.unshift(c);
+            }
+            data.last = new_data.last;
+            data.count = data.chats.length;
+            display();
+        }
+    };
+
     this.post = function(name, message){
         if(name == null || message == null || name.length < 1 || message.length < 1){
             return;
@@ -88,22 +115,13 @@ function Chat(){
         post_data.name = name;
         post_data.message = message;
         $.post(api, post_data, function(res){
-            if(res.error == null && (data == null || res.last != data.last)){
-                data = res;
-                display();
-            }
+            chat.add_chat_data(res);
         }, 'json');
     };
     
-    this.load = function(on_load_func){
+    this.load = function(){
         $.getJSON(api, function(res){
-            if(res.error == null && (data == null || res.last != data.last)){
-                data = res;
-                display();
-                if(on_load_func){
-                    on_load_func();
-                }
-            }
+            chat.add_chat_data(res);
         });
     };
 };
