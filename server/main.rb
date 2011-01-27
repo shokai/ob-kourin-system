@@ -60,7 +60,11 @@ post '/chat.json' do
     time = Time.now.to_i
     c = Chat.new(:name => name, :message => m, :time => time, :addr => addr)
     c.save
-    Say.new(@@conf['say_api']).post(c.message) unless c.local?
+    begin
+      Say.new(@@conf['say_api']).post(c.message) unless c.local?
+    rescue => e
+      STDERR.puts e
+    end
     res = {
       :chats => recent_chats,
       :count => recent_chats.count,
