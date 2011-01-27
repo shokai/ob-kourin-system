@@ -20,24 +20,28 @@ get '/' do
   haml :index
 end
 
-def recent_chats(per_page=40, page=1)
-  return @recent_chats if @recent_chats
-  @recent_chats = Chat.find(:all, :limit => per_page).desc(:time).skip((page-1)*per_page).map{|i|i.to_hash}
+def get_chats(per_page=40, last=nil)
+  if !last or last < 1
+    chats = Chat.find(:all)
+  else
+    chats = Chat.where(:time.lt => last)
+  end
+  return [] if chats.count < 1
+  return chats.desc(:time).limit(per_page).map{|i|i.to_hash}
 end
 
 get '/chat.json' do
   content_type 'application/json'
-  page = params['page'].to_i
   per_page = params['per_page'].to_i
-  page = 1 if !page or page < 1
+  last = params['last'].to_i
   per_page = 40 if !per_page or per_page < 1
-  chats = recent_chats(per_page, page)
+  last = nil if !last or last < 1
+  chats = get_chats(per_page, last)
   if chats.size > 0
     res = {
       :chats => chats,
       :count => chats.count,
       :last => chats[0][:time],
-      :page => page,
       :per_page => per_page
     }
   else
@@ -65,10 +69,11 @@ post '/chat.json' do
     rescue => e
       STDERR.puts e
     end
+    chats = get_chats
     res = {
-      :chats => recent_chats,
-      :count => recent_chats.count,
-      :last => recent_chats[0][:time]
+      :chats => chats,
+      :count => chats.count,
+      :last => chats[0][:time]
     }
     @mes = res.to_json
   end
