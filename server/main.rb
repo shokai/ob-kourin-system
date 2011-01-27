@@ -20,18 +20,31 @@ get '/' do
   haml :index
 end
 
-def recent_chats(limit=40)
+def recent_chats(per_page=40, page=1)
   return @recent_chats if @recent_chats
-  @recent_chats = Chat.find(:all, :limit => limit).desc(:time).map{|i|i.to_hash}
+  @recent_chats = Chat.find(:all, :limit => per_page).desc(:time).skip((page-1)*per_page).map{|i|i.to_hash}
 end
 
 get '/chat.json' do
   content_type 'application/json'
-  res = {
-    :chats => recent_chats,
-    :count => recent_chats.count,
-    :last => recent_chats[0][:time]
-  }
+  page = params['page'].to_i
+  per_page = params['per_page'].to_i
+  page = 1 if !page or page < 1
+  per_page = 40 if !per_page or per_page < 1
+  chats = recent_chats(per_page, page)
+  if chats.size > 0
+    res = {
+      :chats => chats,
+      :count => chats.count,
+      :last => chats[0][:time],
+      :page => page,
+      :per_page => per_page
+    }
+  else
+    res = {
+      :error => 'no chats',
+    }
+  end
   @mes = res.to_json
 end
 
