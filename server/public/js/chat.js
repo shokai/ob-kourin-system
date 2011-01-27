@@ -30,13 +30,26 @@ $(function(){
 		$(this).css("cursor","default"); 
 	});
 
-    //$('div#chat_paging').click(paging(++page_at));
+    $('div#chat_paging').html('Load Page'+(page_at+1));
+    $('div#chat_paging').click(paging);
     $('div#chat_paging').hover(function() {
 		$(this).css("cursor","pointer"); 
 	},function(){
 		$(this).css("cursor","default"); 
 	});
 });
+
+function paging(page){
+    chat.load(function(res){
+        if(res.error == null){
+            page_at++;
+            $('div#chat_paging').html('Load Page'+(page_at+1));
+        }
+        else{
+            $('div#chat_paging').css('visibility', 'hidden');
+        }
+    },data.chats[data.chats.length-1].time);
+}
 
 function reload_camera(){
     div = $('div#camera');
@@ -126,9 +139,12 @@ function Chat(){
         }, 'json');
     };
     
-    this.load = function(){
-        $.getJSON(api, function(res){
+    this.load = function(on_load, time){
+        var url = api;
+        if(time) url += "?last="+time;
+        $.getJSON(url, function(res){
             chat.merge_chat_data(res);
+            if(on_load != null) on_load(res);
         });
     };
 };
