@@ -1,19 +1,20 @@
 import processing.video.*;
 
 Capture camera;
+PImage img;
 
 void setup(){
-  size(320, 240); // width, height
-  camera =  new Capture(this, width, height, 1); // 1fps
+    size(240, 320); // width, height
+    camera =  new Capture(this, height, width, 12); // 12fps
 }
 
 void draw(){
-  image(camera, 0, 0);
-  saveFrame("camera.jpg"); // capture
-  delay(1000);
+    rotate(PI/2); // 90度
+    image(camera, 0, camera.height*-1);
+    saveFrame("camera.jpg"); // capture
+    delay(1000);
 }
 
 void captureEvent(Capture camera){
-  camera.read();
+    camera.read();
 }
-
