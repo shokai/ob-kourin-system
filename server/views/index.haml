@@ -2,17 +2,17 @@
 %html
   %head
     %title= @title
-    %link{:rel => 'stylesheet', :href => "#{app_root}/reset-3.1.1.css", :type => 'text/css'}
-    %link{:rel => 'stylesheet', :href => "#{app_root}/fonts-3.1.1.css", :type => 'text/css'}
-    %link{:rel => 'stylesheet', :href => "#{app_root}/main.css", :type => 'text/css'}
+    %link{:rel => 'stylesheet', :href => "#{app_root}/css/reset-3.1.1.css", :type => 'text/css'}
+    %link{:rel => 'stylesheet', :href => "#{app_root}/css/fonts-3.1.1.css", :type => 'text/css'}
+    %link{:rel => 'stylesheet', :href => "#{app_root}/css/main.css", :type => 'text/css'}
     :javascript
       var api = "#{app_root}/chat.json";
       var camera_url = "#{camera_url}";
       var robot_api = "#{app_root}/robot";
-    %script{:type => 'text/javascript', :src => "#{app_root}/jquery.js"}
-    %script{:type => 'text/javascript', :src => "#{app_root}/jquery.cookie.js"}
-    %script{:type => 'text/javascript', :src => "#{app_root}/util.js"}
-    %script{:type => 'text/javascript', :src => "#{app_root}/chat.js"}
+    %script{:type => 'text/javascript', :src => "#{app_root}/js/jquery.js"}
+    %script{:type => 'text/javascript', :src => "#{app_root}/js/jquery.cookie.js"}
+    %script{:type => 'text/javascript', :src => "#{app_root}/js/util.js"}
+    %script{:type => 'text/javascript', :src => "#{app_root}/js/chat.js"}
   %body
     %div#content
       %div#head
