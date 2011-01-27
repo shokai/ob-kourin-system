@@ -96,11 +96,18 @@ function Chat(){
             display();
             return;
         }
-        if(data.last < new_data.last){
-            for(var i = new_data.chats.length-1; i >= 0; i--){
-                c = new_data.chats[i];
-                if(c.time > data.last) data.chats.unshift(c);
+        if(data.last != new_data.last){
+            for(var i = 0; i < new_data.length; i++){
+                var c = new_data.chats[i];
+                var contains = false;
+                for(var j = 0; j < data.length; j++){
+                    if(data.chats[j].id == c.id){
+                        contains = true;
+                    }
+                }
+                if(!contains) data.chats.push(c);
             }
+            data.chats.sort(function(a,b){return b.time-a.time});
             data.last = new_data.last;
             data.count = data.chats.length;
             display();
