@@ -23,6 +23,11 @@ $(function(){
     $('div#robot span.button#left').click(function(){robot_post('c')});
     $('div#robot span.button#right').click(function(){robot_post('d')});
     $('div#robot span.button#back').click(function(){robot_post('b')});
+    $('div#robot span.button').hover(function() {
+		$(this).css("cursor","pointer"); 
+	},function(){
+		$(this).css("cursor","default"); 
+	});
 });
 
 function reload_camera(){
