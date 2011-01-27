@@ -26,6 +26,17 @@ div#chat{
     margin : 10px;
 }
 
+div#chat_paging{
+    text-align : center;
+    font-size : 18pt;
+    color : #000;
+    border : 2px solid #444;
+    background-color : #DDD;
+    margin : 5px;
+    padding : 3px;
+    border-radius : 10px;
+}
+
 div#robot{
     position: fixed;
     top: 100px;
