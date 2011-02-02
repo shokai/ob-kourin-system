@@ -24,6 +24,7 @@ $(function(){
     $('div#robot span.button#left').click(function(){robot_post('c')});
     $('div#robot span.button#right').click(function(){robot_post('d')});
     $('div#robot span.button#back').click(function(){robot_post('b')});
+    $('div#robot span.button#led').click(function(){robot_post('e')});
     $('div#robot span.button').hover(function() {
 		$(this).css("cursor","pointer"); 
 	},function(){
