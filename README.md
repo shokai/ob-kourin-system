@@ -7,6 +7,7 @@ Dependencies
 * Sinatra
 * Mongo DB
 * [mac-say-server](https://github.com/shokai/mac-say-server)
+* [serial-http-gateway](https://github.com/shokai/serial-http-gateway)
 
 
 Run Server
