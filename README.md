@@ -21,7 +21,7 @@ then, edit it.
 
 Instlal Dependencies
 
-    % sudo gem install bundler
+    % gem install bundler
     % bundle install
 
 
@@ -42,6 +42,12 @@ http://(app_root)/camera
 
 * get, post 240x320 image
 * see server/misc/sample\_upload\_client.rb
+
+
+Robot
+-----
+
+use [serial-http-gateway](https://github.com/shokai/serial-http-gateway).
 
 
 Camera and Uploader
