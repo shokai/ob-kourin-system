@@ -11,5 +11,4 @@ say_api : 'http://localhost:8100/say'
 camera_dir : 'public/camera'
 
 # robot
-robot_host : '127.0.0.1'
-robot_port : 8782
+robot : 'http://localhost:8783/'
