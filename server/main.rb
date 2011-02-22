@@ -108,15 +108,15 @@ end
 
 post '/robot' do
   puts m = params[:message]
-  require 'socket'
-  begin
-    s = TCPSocket.open(@@conf['robot_host'], @@conf['robot_port'])
-    s.puts m
-    s.close
-  rescue => e
-    STDERR.puts e
+  if !m or m.size < 1
+    @mes = {:error => 'message required'}.to_json
+  else
+    uri = URI.parse(@@conf['robot'])
+    res = nil
+    Net::HTTP.start(uri.host, uri.port){|http|
+      res = http.post(uri.path, m)
+    }
+    puts "response body size : #{res.body.size}(bytes)"
+    @mes = res.body
   end
-  @mes = {
-    :message => m
-  }.to_json
 end

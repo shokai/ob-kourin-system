@@ -6,6 +6,8 @@ require 'bson'
 require 'mongoid'
 gem 'mongoid','>=2.0.0.rc.7'
 require 'yaml'
+require 'net/http'
+require 'uri'
 require File.dirname(__FILE__)+'/models/chat'
 require File.dirname(__FILE__)+'/say'
 
