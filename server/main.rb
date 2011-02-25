@@ -1,16 +1,6 @@
 #!/usr/bin/env ruby
 # -*- coding: utf-8 -*-
 
-before do
-  Mongoid.configure{|conf|
-    conf.master = Mongo::Connection.new(@@conf['mongo_server'], @@conf['mongo_port']).db(@@conf['mongo_dbname'])
-  }
-end
-
-def app_root
-  "#{env['rack.url_scheme']}://#{env['HTTP_HOST']}#{env['SCRIPT_NAME']}"
-end
-
 def camera_url
   "#{app_root}/camera"
 end
