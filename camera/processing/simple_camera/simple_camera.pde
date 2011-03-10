@@ -9,8 +9,8 @@ void setup(){
 }
 
 void draw(){
-    rotate(PI/2); // 90度
-    image(camera, 0, camera.height*-1);
+    rotate(PI/2+PI); // 270度
+    image(camera, camera.width*-1, 0);
     saveFrame("camera.jpg"); // capture
     delay(1000);
 }
