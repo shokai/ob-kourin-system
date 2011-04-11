@@ -26,7 +26,7 @@ end
 p params
 
 begin
-  conf = YAML::load open(params[:conf]).read
+  conf = YAML.load open(params[:conf]).read
   p conf
 rescue => e
   STDERR.puts 'config.yaml load error!'
@@ -42,20 +42,21 @@ end
 
 last_mtime = 0
 loop do
-  if File.mtime(f).to_i != last_mtime
-    last_mtime = File.mtime(f).to_i
-    tmp_file = File.dirname(__FILE__)+'/tmp'
-    FileUtils.cp(f, tmp_file)
-    begin
-      url = UploadClient::upload(tmp_file, conf['api'])
-    rescue => e
-      STDERR.puts e
-      url = nil
-    rescue UploadError => e
-      STDERR.puts e
-      url = nil
+  begin
+    now_mtime = File.mtime(f).to_i
+    if now_mtime != last_mtime
+      last_mtime = now_mtime
+      tmp_file = File.dirname(__FILE__)+'/tmp'
+      FileUtils.cp(f, tmp_file)
+      url = UploadClient.upload(tmp_file, conf['api'])
+      puts "[#{last_mtime}] #{url}" if url
     end
-    puts "[#{last_mtime}] #{url}" if url
+  rescue => e
+    STDERR.puts e
+    url = nil
+  rescue UploadError => e
+    STDERR.puts e
+    url = nil
   end
   break unless params[:loop]
   sleep params[:interval].to_i
