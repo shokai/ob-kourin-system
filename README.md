@@ -83,3 +83,10 @@ run uploader.
     % cp sample.config.yaml config.yaml
     % ruby uploader.rb -help
     % ruby uploader.rb -c config.yaml -l -i 5 -f ../camera/processing/simple_camera/camera.jpg
+
+
+Developers
+==========
+
+* Sho Hashimoto
+* Kyo Hirota
