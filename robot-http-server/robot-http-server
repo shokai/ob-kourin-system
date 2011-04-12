@@ -14,16 +14,18 @@ parser.comment(:bit, 'default : 8')
 parser.comment(:stopbit, 'default : 1')
 parser.comment(:parity, 'default : 0')
 parser.comment(:port, 'TCP Port - default : 8783')
-serial_device, params = parser.parse(ARGV)
+parser.comment(:post_interval, 'default : 3000 (ms)')
+serial_device, @@params = parser.parse(ARGV)
 
 {
   :bps => 9600,
   :bit => 8,
   :stopbit => 1,
   :parity => 0,
-  :port => 8783
+  :port => 8783,
+  :post_interval => 3000
 }.each{|k,v|
-  params[k] = v if params[k] == nil
+  @@params[k] = v if @@params[k] == nil
 }
 
 if !serial_device or parser.has_option(:help)
@@ -39,7 +41,7 @@ if !serial_device or parser.has_option(:help)
 end
 
 begin
-  @@sp = SerialPort.new(serial_device, params[:bps].to_i, params[:bit].to_i, params[:stopbit].to_i, params[:parity].to_i) # 9600bps, 8bit, stopbit 1, parity none
+  @@sp = SerialPort.new(serial_device, @@params[:bps].to_i, @@params[:bit].to_i, @@params[:stopbit].to_i, @@params[:parity].to_i) # 9600bps, 8bit, stopbit 1, parity none
 rescue => e
   STDERR.puts 'cannot open serialport!!'
   STDERR.puts e.to_s
@@ -47,6 +49,7 @@ rescue => e
 end
 
 @@recvs = Array.new
+@@last_post_at = 0
 
 class Handler  < EventMachine::Connection
   include EventMachine::HttpServer
@@ -60,7 +63,11 @@ class Handler  < EventMachine::Connection
       res.send_response
     elsif @http_request_method == 'POST'
       res.status = 200
-      @@sp.puts @http_post_content
+      now = Time.now.to_i*1000+(Time.now.usec/1000.0).round
+      if @@last_post_at + @@params[:post_interval] < now
+        @@last_post_at = now
+        @@sp.puts @http_post_content
+      end
       res.content = @@recvs.to_json
       res.send_response
     end
@@ -92,8 +99,8 @@ EM::run do
     end
   end
 
-  EventMachine::start_server("0.0.0.0", params[:port], Handler)
+  EventMachine::start_server("0.0.0.0", @@params[:port], Handler)
   puts "starting http server.."
-  puts " => port #{params[:port]}"
+  puts " => port #{@@params[:port]}"
 
 end
