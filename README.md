@@ -88,5 +88,5 @@ run uploader.
 Developers
 ==========
 
-* Sho Hashimoto
-* Kyo Hirota
+* [Sho Hashimoto](https://github.com/shokai)
+* [Kyo Hirota](https://github.com/tomoyo-kousaka)
