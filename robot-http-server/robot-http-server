@@ -64,7 +64,7 @@ class Handler  < EventMachine::Connection
     elsif @http_request_method == 'POST'
       res.status = 200
       now = Time.now.to_i*1000+(Time.now.usec/1000.0).round
-      if @@last_post_at + @@params[:post_interval] < now
+      if @@last_post_at + @@params[:post_interval].to_i < now
         @@last_post_at = now
         @@sp.puts @http_post_content
       end
