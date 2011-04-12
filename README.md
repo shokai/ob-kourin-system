@@ -4,11 +4,11 @@ OB降臨システム
 Components
 ----------
 
-* camera (Processing)
 * robot (Arduino)
 * robot-http-server (Ruby 1.8.7)
 * server (Sinatra 1.2, Ruby 1.8.7, MongoDB 1.6+)
-* uploader (Ruby 1.8.7)
+* camera (Processing)
+* camera uploader (Ruby 1.8.7)
 * [mac-say-server](https://github.com/shokai/mac-say-server)
 
 
@@ -73,7 +73,11 @@ Camera and Uploader
 
 run camera (camera/processing/simple\_camera/simple\_camera.pde) with [Processing](http://processing.org/)
 
-run uploader
+install dependencies of uploader.
+
+    % gem install ArgsParser httpclient json
+
+run uploader.
 
     % cd uploader
     % cp sample.config.yaml config.yaml
