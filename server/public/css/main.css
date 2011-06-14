@@ -50,6 +50,8 @@ div#robot{
 
 div#camera{
     margin : 5px;
+    width : 240px;
+    height : 320px;
 }
 
 div#controller{
