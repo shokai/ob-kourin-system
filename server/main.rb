@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 def camera_url
-  "#{app_root}/camera"
+  'http://localhost:8080'
 end
 
 get '/' do
@@ -66,33 +66,6 @@ post '/chat.json' do
       :last => chats[0][:time]
     }
     @mes = res.to_json
-  end
-end
-
-get '/camera' do
-  last = Dir.glob(File.dirname(__FILE__)+'/'+@@conf['camera_dir']+'/*.jpg').sort{|a,b|
-    a.to_i <=> b.to_i
-  }.last
-  content_type 'image/jpg'
-  File.open(last)
-end
-
-post '/camera' do
-  if !params[:file]
-    @mes = {:error => 'error'}.to_json
-  else
-    camera_dir = File.dirname(__FILE__)+'/'+@@conf['camera_dir']
-    Dir.mkdir(camera_dir) unless File.exists? camera_dir
-    name = "#{camera_dir}/#{Time.now.to_i}.jpg"
-    File.open(name, 'wb'){|f|
-      f.write params[:file][:tempfile].read
-    }
-    if File.exists? name
-      @mes = {
-        :url => camera_url,
-        :size => File.size(name)
-      }.to_json
-    end
   end
 end
 

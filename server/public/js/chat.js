@@ -1,7 +1,6 @@
 
 var chat = new Chat();
 var timer_sync;
-var timer_camera;
 var KC = {tab:9, enter:13, left:37, up:38, right:39, down:40};
 var data;
 var page_at = 1;
@@ -11,6 +10,7 @@ $(function(){
     if(name != null && name.length > 0){
         $('input#name').val(name);
     }
+    CameraServer.start($('div#camera'), camera_url, 500);
     chat.load();
     $('input#post').click(post);
     $('input#message').keydown(function(e){
@@ -19,7 +19,6 @@ $(function(){
         }
     });
     timer_sync = setInterval(chat.load, 20000);
-    timer_camera = setInterval(reload_camera, 5000);
     $('div#robot span.button#go').click(function(){robot_post('a')});
     $('div#robot span.button#left').click(function(){robot_post('c')});
     $('div#robot span.button#right').click(function(){robot_post('d')});
@@ -51,12 +50,6 @@ function paging(page){
         }
     },data.chats[data.chats.length-1].time);
 }
-
-function reload_camera(){
-    div = $('div#camera');
-    img = $('<img src="'+camera_url+'?time='+new Date().getTime()+'" width="240" height="320">')
-    div.html(img);
-};
 
 function robot_post(message){
     post_data = {'message' : message};
