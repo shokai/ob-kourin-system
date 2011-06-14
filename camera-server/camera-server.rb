@@ -3,7 +3,7 @@ require 'rubygems'
 require 'eventmachine'
 require 'evma_httpserver'
 
-PORT = 8080
+PORT = 8784
 @@img = 'no image'
 
 class Handler < EM::Connection

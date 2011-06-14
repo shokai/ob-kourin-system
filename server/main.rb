@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 def camera_url
-  'http://localhost:8080'
+  @@conf['camera_server']
 end
 
 get '/' do

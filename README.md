@@ -68,6 +68,14 @@ run
     % robot-http-server/robot-http-server /dev/tty.usbdevice -bps 4800 -post_interval 5000
 
 
+Run Camera-Server
+-----------------
+
+    % ruby camera-server/camera-server.rb
+
+=> port 8784
+
+
 Camera and Uploader
 -------------------
 
@@ -75,14 +83,11 @@ run camera (camera/processing/simple\_camera/simple\_camera.pde) with [Processin
 
 install dependencies of uploader.
 
-    % gem install ArgsParser httpclient json
+    % gem install ArgsParser json
 
 run uploader.
 
-    % cd uploader
-    % cp sample.config.yaml config.yaml
-    % ruby uploader.rb -help
-    % ruby uploader.rb -c config.yaml -l -i 5 -f ../camera/processing/simple_camera/camera.jpg
+    % ruby camera-server/uploader.rb -f camera/processing/simple_camera/camera.jpg -u http://hostname:8784/ -i 1 -loop
 
 
 Developers
