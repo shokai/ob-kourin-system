@@ -2,6 +2,7 @@
 %html
   %head
     %title= @title
+    %meta{:name => 'viewport',:content => 'width=950px,user-scalable=yes'}
     %link{:rel => 'stylesheet', :href => "#{app_root}/css/reset-3.1.1.css", :type => 'text/css'}
     %link{:rel => 'stylesheet', :href => "#{app_root}/css/fonts-3.1.1.css", :type => 'text/css'}
     %link{:rel => 'stylesheet', :href => "#{app_root}/css/main.css", :type => 'text/css'}
@@ -22,7 +23,7 @@
           名前
           %input{:type => 'text', :id => 'name', :size => 10, :value => 'おなまえ'}
           ：
-          %input{:type => 'text', :id => 'message', :size => 50, :value => 'きゃべつ'}
+          %input{:type => 'text', :id => 'message', :size => 40, :value => 'たまご〜'}
           %input{:type => 'button', :id => 'post', :value => '送信'}
       %div#chat
       %div#chat_paging
