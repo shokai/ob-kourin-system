@@ -8,7 +8,7 @@ Components
 * robot-http-server (Ruby 1.8.7)
 * server (Sinatra 1.2, Ruby 1.8.7, MongoDB 1.6+)
 * camera (Processing)
-* camera uploader (Ruby 1.8.7)
+* camera-server and uploader (Ruby 1.8.7)
 * [mac-say-server](https://github.com/shokai/mac-say-server)
 
 
