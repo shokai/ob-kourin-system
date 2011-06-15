@@ -6,7 +6,7 @@ body{
 div#content{
     padding-top : 20px;
     margin-left : 20px;
-    width : 800px;
+    width : 650px;
     background-color : #FFF;
 }
 
@@ -40,7 +40,7 @@ div#chat_paging{
 div#robot{
     position: fixed;
     top: 100px;
-    left: 830px;
+    left: 680px;
     padding-left: 15px;
     padding-right: 15px;
     padding-top: 5px;
