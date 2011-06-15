@@ -6,7 +6,7 @@ var data;
 var page_at = 1;
 
 $(function(){
-    var name = $.cookie('name')
+    var name = $.cookie('name');
     if(name != null && name.length > 0){
         $('input#name').val(name);
     }
@@ -60,7 +60,7 @@ function robot_post(message){
 function post(){
     var name = $('input#name').val();
     if(name.length > 0){
-        $.cookie('name', name);
+        $.cookie('name', name, {expires : 14});
         chat.post(name, $('input#message').val());
         $('input#message').val('');
     }
