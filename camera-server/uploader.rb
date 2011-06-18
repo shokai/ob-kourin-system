@@ -49,9 +49,10 @@ loop do
         puts "[#{last_mtime}] #{params[:url]}"
       }
     end
+  rescue Timeout::Error => e
+    STDERR.puts e
   rescue => e
     STDERR.puts e
-    url = nil
   end
   break unless params[:loop]
   sleep params[:interval].to_f
