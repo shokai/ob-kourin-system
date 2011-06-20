@@ -6,6 +6,7 @@ var data;
 var page_at = 1;
 
 $(function(){
+    $('body').click(Notifier.request);
     var name = $.cookie('name');
     if(name != null && name.length > 0){
         $('input#name').val(name);
@@ -112,7 +113,10 @@ function Chat(){
                         contains = true;
                     }
                 }
-                if(!contains) data.chats.push(c);
+                if(!contains){
+                    data.chats.push(c);
+                    if(c.name != $.cookie('name')) Notifier.notify("http://gadgtwit.appspot.com/twicon/"+c.name, c.name, c.message.htmlEscape());
+                }
             }
             data.chats.sort(function(a,b){return b.time-a.time});
             data.last = new_data.last;
@@ -141,4 +145,23 @@ function Chat(){
             if(on_load != null) on_load(res);
         });
     };
+};
+
+
+var Notifier = {};
+Notifier.request = function(){
+    if(window.webkitNotifications.checkPermission() == 1){
+        window.webkitNotifications.requestPermission();
+    }
+};
+Notifier.notify = function(icon, title, body){
+    if(window.webkitNotifications.checkPermission() == 0){
+        var notif = window.webkitNotifications.createNotification(icon, title, body);
+        notif.ondisplay = function(){
+            setTimeout(function(){
+                if(notif.cancel) notif.cancel();
+            }, 3000);
+        };
+        notif.show();
+    }
 };
