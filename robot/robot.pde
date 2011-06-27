@@ -1,5 +1,15 @@
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include <util/delay.h>
+#define TCNT1_BOTTOM 49896    //割り込み周期:50msec
+
+boolean ADC_FLAG = false;
+int AnalogData;
+
 int sig = 0;
-int led = -1;
+int ledR = -1;
+int ledG = -1;
+int ledGtmp = -1;
 int spd=255; // 1~255の値にする
 
 void setup(){
@@ -8,19 +18,36 @@ void setup(){
   pinMode(4,OUTPUT); // 左モーター用ドライバピン
   pinMode(7,OUTPUT); // 右モーター用ドライバピン
   pinMode(8,OUTPUT); // 右モーター用ドライバピン
-  pinMode(13,OUTPUT);
+  pinMode(12,OUTPUT);//緑LED
+  pinMode(13,OUTPUT);//赤LED
+  TIMSK1 = (1<<TOIE1); //タイマ/カウンタ1割り込み使用
+  TCCR1A = 0;//タイマ使用
+  TCCR1B = 5;//分周数:1024 == ck/1024 
+  TCNT1 = 0;//タイマ/カウンタ1初期化
+  sei(); // 全割り込み許可
+  AnalogData = 0;
   motor_stop();
-  ledOff();
+  ledROff();
 }
 
-void ledOn(){
+void ledROn(){
   digitalWrite(13,HIGH);
-  Serial.println("led_on");
+  Serial.println("ledR_on");
 }
 
-void ledOff(){
+void ledROff(){
   digitalWrite(13,LOW);
-  Serial.println("led_off");
+  Serial.println("ledR_off");
+}
+
+void ledGOn(){
+  digitalWrite(12,HIGH);
+  Serial.println("ledG_on");
+}
+
+void ledGOff(){
+  digitalWrite(12,LOW);
+  Serial.println("ledG_off");
 }
 
 void motor_stop(){
@@ -98,10 +125,31 @@ void loop(){
       motor_stop();
       break;
     case 'e':
-      led = led * (-1);
-      if(led<=0) ledOff();
-      else ledOn();
+      ledR = ledR * (-1);
+      if(ledR<=0) ledROff();
+      else ledROn();
+      break;
+    case 'f':
+      ledG = ledG * (-1);
+      ledGtmp = ledGtmp * (-1);
+      if(ledG<=0) ledGOff();
+      else ledGOn();
       break;
     }
   }
+    
+  if((ADC_FLAG == true)&&(ledG == 1)){ //フラグが真なら処理
+    if(ledGtmp > 0){
+      ledGOff(); 
+    }else{
+      ledGOn();
+    }
+    ledGtmp = ledGtmp * (-1);
+    ADC_FLAG = false;
+  }
+}
+
+ISR(TIMER1_OVF_vect){
+  TCNT1 = TCNT1_BOTTOM;
+  ADC_FLAG = true;
 }
