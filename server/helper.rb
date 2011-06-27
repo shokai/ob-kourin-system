@@ -9,6 +9,7 @@ require 'yaml'
 require 'net/http'
 require 'uri'
 require File.dirname(__FILE__)+'/models/chat'
+require File.dirname(__FILE__)+'/models/user'
 require File.dirname(__FILE__)+'/say'
 
 begin
