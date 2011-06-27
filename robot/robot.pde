@@ -129,9 +129,15 @@ void loop(){
       if(ledR<=0) ledROff();
       else ledROn();
       break;
-    case 'f':
-      ledG = ledG * (-1);
-      ledGtmp = ledGtmp * (-1);
+    case 'f'://コックピットLEDをon
+      ledG = 1;
+      ledGtmp = 1;
+      if(ledG<=0) ledGOff();
+      else ledGOn();
+      break;
+    case 'g'://コックピットLEDをoff
+      ledG = -1;
+      ledGtmp = -1;
       if(ledG<=0) ledGOff();
       else ledGOn();
       break;
@@ -139,7 +145,7 @@ void loop(){
   }
     
   if((ADC_FLAG == true)&&(ledG == 1)){ //フラグが真なら処理
-    if(ledGtmp > 0){
+    if(ledGtmp < 0){
       ledGOff(); 
     }else{
       ledGOn();
