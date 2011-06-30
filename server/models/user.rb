@@ -1,7 +1,13 @@
-require 'digest/md5'
-
 class User
   include Mongoid::Document
   field :name
-  field :last, :type => Integer
+  field :addr
+  field :expire, :type => Integer
+  def to_hash
+    {
+      :name => name,
+      :addr => addr,
+      :expire => expire
+    }
+  end
 end

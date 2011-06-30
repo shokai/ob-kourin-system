@@ -5,6 +5,16 @@ def camera_url
   @@conf['camera_server']
 end
 
+before '/chat.json' do
+  name = cookie[:name]
+  addr = env['REMOTE_ADDR']
+  user = User.where(:name => name).first
+  user = User.new(:name => name) unless user
+  user.expire = Time.now.to_i+60
+  user.addr = addr
+  user.save
+end
+
 get '/' do
   @title = 'OB降臨システム'
   haml :index
