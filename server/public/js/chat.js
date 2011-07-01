@@ -67,7 +67,19 @@ function post(){
     }
 };
 
-function display(){
+var display = function(){
+    var div = $('div#users');
+    div.html('');
+    for(var i = 0; i < data.users.length; i++){
+        user = data.users[i];
+        var span = $('<span>');
+        var img = $('<img>');
+        if(user.match("^[a-zA-Z0-9_]+$")) img.attr('src','http://gadgtwit.appspot.com/twicon/'+user).attr('title', user);
+        else img.attr('src', app_root+'/noname.png').attr('title', user);
+        span.append(img);
+        div.append(span);
+    }
+
     if(data == null || data.chats.length < 1) return;
     div = $('div#chat');
     ul = $('<ul />');
@@ -91,20 +103,7 @@ function display(){
         li.append(span_t);
         ul.append(li);
     }
-    div.html('');
-    div.append(ul);
-    
-    div = $('div#users');
-    div.html('');
-    for(var i = 0; i < data.users.length; i++){
-        user = data.users[i];
-        var span = $('<span>');
-        var img = $('<img>');
-        if(user.match("^[a-zA-Z0-9_]+$")) img.attr('src','http://gadgtwit.appspot.com/twicon/'+user).attr('title', user);
-        else img.attr('src', app_root+'/noname.png').attr('title', user);
-        span.append(img);
-        div.append(span);
-    }
+    div.html(ul);
 };
 
 function Chat(){
@@ -115,6 +114,9 @@ function Chat(){
             data = new_data;
             display();
             return;
+        }
+        else{
+            data.users = new_data.users;
         }
         if(data.last != new_data.last){
             for(var i = 0; i < new_data.chats.length; i++){
