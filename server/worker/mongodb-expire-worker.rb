@@ -45,6 +45,6 @@ loop do
     STDERR.puts e
     exit 1
   end
-  sleep params[:interval].to_i
   break unless params[:loop]
+  sleep params[:interval].to_i
 end
