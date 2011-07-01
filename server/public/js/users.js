@@ -25,6 +25,6 @@ var display_users = function(){
     if(xy > window.innerWidth/2) xy = window.innerWidth/2;
     img.attr('width', xy).attr('height', xy);
     $('#users').append(img);
-    $('#users').append($('<span>').append(user).css('font-size',xy*2/user.length));
+    $('#users').append($('<span>').append(user).css('font-size',xy/3));
     user_i++;
 };
