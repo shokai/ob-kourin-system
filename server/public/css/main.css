@@ -26,6 +26,11 @@ div#chat{
     margin : 10px;
 }
 
+div#chat span.chat img{
+    width : 48px;
+    height : 48px;
+}
+
 div#chat_paging{
     text-align : center;
     font-size : 18pt;

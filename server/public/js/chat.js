@@ -98,10 +98,10 @@ var display = function(){
         tmp += c.message.htmlEscape().replace_all(/(https?\:[\w\.\~\-\/\?\&\+\=\:\@\%\;\#\%]+)/, '<a href="$1">$1</a>');
         span.append(tmp);
         if(c.name.match("^[a-zA-Z0-9_]+$")){
-            img = $('<img>').attr('src', 'http://gadgtwit.appspot.com/twicon/'+c.name).attr('width',48).attr('height',48);
+            img = $('<img>').attr('src', 'http://gadgtwit.appspot.com/twicon/'+c.name);
         }
         else{
-            img = $('<img>').attr('src', app_root+'/noname.png').attr('width',48).attr('height',48);
+            img = $('<img>').attr('src', app_root+'/noname.png');
         }
         li.prepend(img);
         li.append(span)
