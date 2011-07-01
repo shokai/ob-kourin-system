@@ -1,0 +1,24 @@
+!!! XHTML
+%html
+  %head
+    %title= @title
+    %meta{:name => 'viewport',:content => 'width=100,user-scalable=yes'}
+    :javascript
+      var api = "#{app_root}/users.json";
+      var app_root = "#{app_root}";
+    %script{:type => 'text/javascript', :src => "#{app_root}/js/jquery.js"}
+    %script{:type => 'text/javascript', :src => "#{app_root}/js/users.js"}
+    :css
+      body {
+        margin : 0px;
+        padding : 0px;
+        background-color : #000;
+        color : #FFF;
+      }
+      div {
+        margin : 0px;
+        padding : 0px;
+      }
+  %body
+    %div#content
+      %div#users

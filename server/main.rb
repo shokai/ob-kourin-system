@@ -20,6 +20,10 @@ get '/' do
   haml :index
 end
 
+get '/users' do
+  haml :users
+end
+
 def get_chats(per_page=40, last=nil)
   if !last or last < 1
     chats = Chat.find(:all)
