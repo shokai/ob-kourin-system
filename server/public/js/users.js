@@ -23,8 +23,8 @@ var display_users = function(){
     else img.attr('src', app_root+'/noname.png').attr('title', user);
     var xy = window.innerHeight;
     if(xy > window.innerWidth/2) xy = window.innerWidth/2;
-    img.attr('width', xy).attr('height', xy);
+    img.attr('width', xy*0.7).attr('height', xy*0.7);
     $('#users').append(img);
-    $('#users').append($('<span>').append(user).css('font-size',xy/3));
+    $('#users').append($('<div>').append(user).css('font-size',xy/5));
     user_i++;
 };
