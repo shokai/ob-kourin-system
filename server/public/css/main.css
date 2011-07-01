@@ -37,9 +37,28 @@ div#chat_paging{
     border-radius : 10px;
 }
 
+div#users{
+    position: fixed;
+    top: 30px;
+    left: 650px;
+    width: 280px;
+    #background-color : #FFF;
+}
+
+div#users span{
+    width: 48px;
+    height: 48px;
+    text-align: center;
+}
+
+div#users span img{
+    width: 48px;
+    height: 48px;
+}
+
 div#robot{
     position: fixed;
-    top: 100px;
+    top: 150px;
     left: 650px;
     padding-left: 15px;
     padding-right: 15px;

@@ -10,6 +10,7 @@
       var api = "#{app_root}/chat.json";
       var camera_url = "#{camera_url}";
       var robot_api = "#{app_root}/robot";
+      var app_root = "#{app_root}";
     %script{:type => 'text/javascript', :src => "#{app_root}/js/jquery.js"}
     %script{:type => 'text/javascript', :src => "#{app_root}/js/jquery.cookie.js"}
     %script{:type => 'text/javascript', :src => "#{app_root}/js/util.js"}
@@ -28,6 +29,7 @@
       %div#chat
       %div#chat_paging
         Paging
+      #div#users
       %div#robot
         %div#camera
         %div#controller

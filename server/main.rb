@@ -51,7 +51,7 @@ get '/chat.json' do
   if chats.size > 0
     res = {
       :chats => chats,
-      :count => chats.size,
+      :users => get_users,
       :last => chats[0][:time],
       :per_page => per_page
     }

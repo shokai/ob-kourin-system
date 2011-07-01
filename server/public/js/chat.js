@@ -92,7 +92,19 @@ function display(){
         ul.append(li);
     }
     div.html('');
-    div.append(ul);    
+    div.append(ul);
+    
+    div = $('div#users');
+    div.html('');
+    for(var i = 0; i < data.users.length; i++){
+        user = data.users[i];
+        var span = $('<span>');
+        var img = $('<img>');
+        if(user.match("^[a-zA-Z0-9_]+$")) img.attr('src','http://gadgtwit.appspot.com/twicon/'+user).attr('title', user);
+        else img.attr('src', app_root+'/noname.png').attr('title', user);
+        span.append(img);
+        div.append(span);
+    }
 };
 
 function Chat(){
