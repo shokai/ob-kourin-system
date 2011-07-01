@@ -3,6 +3,8 @@ require 'rubygems'
 require 'mongo'
 require 'ArgsParser'
 require 'yaml'
+require 'uri'
+require 'net/http'
 
 parser = ArgsParser.parser
 parser.bind(:loop, :l, 'do loop', false)
@@ -37,13 +39,21 @@ end
 loop do
   begin
     db['users'].remove({:expire => {:$lt => Time.now.to_i}})
-    if params[:verbose]
-      count = db['users'].count
-      puts "#{count} users - #{Time.now}"
+    count = db['users'].count
+    if count > 0
+      robot_msg = 'f'
+    else
+      robot_msg = 'g'
     end
+    uri = URI.parse(conf['robot'])
+    Net::HTTP.start(uri.host, uri.port){|http|
+        res = http.post(uri.path, robot_msg)
+    }
+    puts "#{count} users - #{Time.now}" if params[:verbose]
+  rescue Timeout::Error => e
+    STDERR.puts e
   rescue => e
     STDERR.puts e
-    exit 1
   end
   break unless params[:loop]
   sleep params[:interval].to_i
