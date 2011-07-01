@@ -97,7 +97,13 @@ var display = function(){
         tmp = c.name.htmlEscape()+' : ';
         tmp += c.message.htmlEscape().replace_all(/(https?\:[\w\.\~\-\/\?\&\+\=\:\@\%\;\#\%]+)/, '<a href="$1">$1</a>');
         span.append(tmp);
-        if(c.name.match("^[a-zA-Z0-9_]+$")) li.prepend('<img src="http://gadgtwit.appspot.com/twicon/'+c.name+'" width="48" height="48" />');
+        if(c.name.match("^[a-zA-Z0-9_]+$")){
+            img = $('<img>').attr('src', 'http://gadgtwit.appspot.com/twicon/'+c.name).attr('width',48).attr('height',48);
+        }
+        else{
+            img = $('<img>').attr('src', app_root+'/noname.png').attr('width',48).attr('height',48);
+        }
+        li.prepend(img);
         li.append(span)
         span_t = $('<span />').addClass('time').append(timeDiff(now, c.time));
         li.append(span_t);
@@ -129,7 +135,11 @@ function Chat(){
                 }
                 if(!contains){
                     data.chats.push(c);
-                    if(c.name != $.cookie('name')) Notifier.notify("http://gadgtwit.appspot.com/twicon/"+c.name, c.name, c.message.htmlEscape());
+                    if(c.name != $.cookie('name')){
+                        if(c.name.match("^[a-zA-Z0-9_]+$")) icon = "http://gadgtwit.appspot.com/twicon/"+c.name;
+                        else icon = app_root+'/noname.png';
+                        Notifier.notify(icon, c.name, c.message.htmlEscape());
+                    }
                 }
             }
             data.chats.sort(function(a,b){return b.time-a.time});
