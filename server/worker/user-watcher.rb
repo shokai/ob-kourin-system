@@ -39,7 +39,8 @@ end
 loop do
   begin
     db['users'].remove({:expire => {:$lt => Time.now.to_i}})
-    count = db['users'].find({:addr => /[^#{conf['local_ipaddr']}]/}).count
+    users = 
+    count = db['users'].find.map{|u|u}.delete_if{|u| u['addr'] =~ /#{conf['local_ipaddr']}/}.size
     puts "#{count} users - #{Time.now}" if params[:verbose]
     if count > 0
       robot_msg = 'f'
