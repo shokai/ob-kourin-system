@@ -30,6 +30,17 @@ def get_chats(per_page=40, last=nil)
   return chats.desc(:time).limit(per_page).map{|i|i.to_hash}
 end
 
+def get_users
+  User.where(:expire.gt => Time.now.to_i).map{|u|
+    u.name || '??'
+  }
+end
+
+get '/users.json' do
+  content_type 'application/json'
+  get_users.to_json
+end
+
 get '/chat.json' do
   content_type 'application/json'
   per_page = params['per_page'].to_i
@@ -40,7 +51,7 @@ get '/chat.json' do
   if chats.size > 0
     res = {
       :chats => chats,
-      :count => chats.count,
+      :count => chats.size,
       :last => chats[0][:time],
       :per_page => per_page
     }

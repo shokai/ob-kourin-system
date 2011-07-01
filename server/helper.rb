@@ -30,9 +30,13 @@ end
 
 def cookie
   cookie = Hash.new
-  env['HTTP_COOKIE'].split(';').each{|i|
-    kv = i.split('=')
-    cookie[URI.decode(kv[0].strip).to_sym] = URI.decode kv[1]
-  }
+  begin
+    env['HTTP_COOKIE'].split(';').each{|i|
+      kv = i.split('=')
+      cookie[URI.decode(kv[0].strip).to_sym] = URI.decode kv[1]
+    }
+  rescue
+    cookie = Hash.new
+  end
   cookie
 end
