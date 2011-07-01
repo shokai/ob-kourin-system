@@ -46,14 +46,14 @@ div#users{
 }
 
 div#users span{
-    width: 48px;
-    height: 48px;
+    width: 45px;
+    height: 45px;
     text-align: center;
 }
 
 div#users span img{
-    width: 48px;
-    height: 48px;
+    width: 45px;
+    height: 45px;
 }
 
 div#robot{
