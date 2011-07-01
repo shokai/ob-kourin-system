@@ -14,7 +14,7 @@ parser.bind(:help, :h, 'show help')
 first, params = parser.parse(ARGV)
 
 if parser.has_option(:help)
-  puts 'ruby mongodb-expire-worker -loop -i 60'
+  puts 'ruby user-watcher.rb -loop -i 60'
   puts parser.help
   exit
 end
@@ -39,7 +39,8 @@ end
 loop do
   begin
     db['users'].remove({:expire => {:$lt => Time.now.to_i}})
-    count = db['users'].count
+    count = db['users'].find({:addr => /[^#{conf['local_ipaddr']}]/}).count
+    puts "#{count} users - #{Time.now}" if params[:verbose]
     if count > 0
       robot_msg = 'f'
     else
@@ -49,7 +50,6 @@ loop do
     Net::HTTP.start(uri.host, uri.port){|http|
         res = http.post(uri.path, robot_msg)
     }
-    puts "#{count} users - #{Time.now}" if params[:verbose]
   rescue Timeout::Error => e
     STDERR.puts e
   rescue => e
