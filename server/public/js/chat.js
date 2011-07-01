@@ -40,7 +40,7 @@ $(function(){
 	});
 });
 
-function paging(page){
+var paging = function(page){
     chat.load(function(res){
         if(res.error == null){
             page_at++;
@@ -52,13 +52,13 @@ function paging(page){
     },data.chats[data.chats.length-1].time);
 }
 
-function robot_post(message){
+var robot_post = function(message){
     post_data = {'message' : message};
     $.post(robot_api, post_data, function(res){
     }, 'json');
 };
 
-function post(){
+var post = function(){
     var name = $('input#name').val();
     if(name.length > 0){
         $.cookie('name', name, {expires : 14});
@@ -81,7 +81,7 @@ var display = function(){
     }
 
     if(data == null || data.chats.length < 1) return;
-    div = $('div#chat');
+    var div = $('div#chat');
     ul = $('<ul />');
     now = Math.floor(new Date().getTime()/1000);
     
