@@ -84,6 +84,7 @@ post '/chat.json' do
     rescue => e
       STDERR.puts e
     end
+    chats = get_chats
     res = {
       :chats => get_chats,
       :users => get_users,
