@@ -134,12 +134,12 @@ function Chat(){
                     }
                 }
                 if(!contains){
-                    data.chats.push(c);
                     if(c.name != $.cookie('name')){
                         if(c.name.match("^[a-zA-Z0-9_]+$")) icon = "http://gadgtwit.appspot.com/twicon/"+c.name;
                         else icon = app_root+'/noname.png';
-                        Notifier.notify(icon, c.name, c.message.htmlEscape());
+                        if(data.last <= c.time) Notifier.notify(icon, c.name, c.message.htmlEscape());
                     }
+                    data.chats.push(c);
                 }
             }
             data.chats.sort(function(a,b){return b.time-a.time});
