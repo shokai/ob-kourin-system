@@ -35,14 +35,26 @@ def get_chats(per_page=40, last=nil)
 end
 
 def get_users
-  User.where(:expire.gt => Time.now.to_i).map{|u|
-    u.name || '??'
-  }
+  User.where(:expire.gt => Time.now.to_i).map{|u|u.to_hash}
 end
 
 get '/users.json' do
   content_type 'application/json'
-  get_users.to_json
+  users = get_users
+  local = Array.new
+  global = Array.new
+  users.each{|u|
+    if u[:addr] =~ /#{@@conf['local_ipaddr']}/
+      local << u[:name]
+    else
+      global << u[:name]
+    end
+  }
+  {
+    :local => local,
+    :global => global,
+    :size => local.size+global.size
+  }.to_json
 end
 
 get '/chat.json' do
@@ -55,7 +67,7 @@ get '/chat.json' do
   if chats.size > 0
     res = {
       :chats => chats,
-      :users => get_users,
+      :users => get_users.map{|u| u[:name]},
       :last => chats[0][:time],
       :per_page => per_page
     }
@@ -87,7 +99,7 @@ post '/chat.json' do
     chats = get_chats
     res = {
       :chats => get_chats,
-      :users => get_users,
+      :users => get_users.map{|u| u[:name]},
       :last => chats[0][:time]
     }
     @mes = res.to_json
