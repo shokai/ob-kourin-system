@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'bundler/setup'
 require 'rack'
-require 'sinatra/reloader'
+require 'sinatra/reloader' if development?
 require 'bson'
 require 'mongoid'
 gem 'mongoid','>=2.0.0'
