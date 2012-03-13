@@ -5,7 +5,7 @@ mongo_dbname : 'ob-web-app'
 
 # say setting
 local_ipaddr : '^(192\.168\.1\.\d+)$'
-say_api : 'http://localhost:8100/say'
+say_api : 'http://localhost:8100/saykana'
 
 # camera
 camera_server : 'http://localhost:8784'
