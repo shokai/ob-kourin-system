@@ -74,7 +74,7 @@ var display = function(){
         user = data.users[i];
         var span = $('<span>');
         var img = $('<img>');
-        if(user.match("^[a-zA-Z0-9_]+$")) img.attr('src','http://gadgtwit.appspot.com/twicon/'+user).attr('title', user);
+        if(user.match("^[a-zA-Z0-9_]+$")) img.attr('src','http://twiticon.herokuapp.com/'+user).attr('title', user);
         else img.attr('src', app_root+'/noname.png').attr('title', user);
         span.append(img);
         div.append(span);
@@ -98,7 +98,7 @@ var display = function(){
         tmp += c.message.htmlEscape().replace_all(/(https?\:[\w\.\~\-\/\?\&\+\=\:\@\%\;\#\%]+)/, '<a href="$1">$1</a>');
         span.append(tmp);
         if(c.name.match("^[a-zA-Z0-9_]+$")){
-            img = $('<img>').attr('src', 'http://gadgtwit.appspot.com/twicon/'+c.name);
+            img = $('<img>').attr('src', 'http://twiticon.herokuapp.com/'+c.name);
         }
         else{
             img = $('<img>').attr('src', app_root+'/noname.png');
@@ -135,7 +135,7 @@ function Chat(){
                 }
                 if(!contains){
                     if(c.name != $.cookie('name')){
-                        if(c.name.match("^[a-zA-Z0-9_]+$")) icon = "http://gadgtwit.appspot.com/twicon/"+c.name;
+                        if(c.name.match("^[a-zA-Z0-9_]+$")) icon = "http://twiticon.herokuapp.com/"+c.name;
                         else icon = app_root+'/noname.png';
                         if(data.last <= c.time) Notifier.notify(icon, c.name, c.message.htmlEscape());
                     }

@@ -19,7 +19,7 @@ var display_users = function(){
     if(user_i > data.global.length-1) user_i = 0;
     var user = data.global[user_i];
     var img = $('<img>');
-    if(user.match("^[a-zA-Z0-9_]+$")) img.attr('src','http://gadgtwit.appspot.com/twicon/'+user).attr('title', user);
+    if(user.match("^[a-zA-Z0-9_]+$")) img.attr('src','http://twiticon.herokuapp.com/'+user).attr('title', user);
     else img.attr('src', app_root+'/noname.png').attr('title', user);
     var xy = window.innerHeight;
     if(xy > window.innerWidth/2) xy = window.innerWidth/2;
