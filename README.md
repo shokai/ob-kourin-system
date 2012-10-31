@@ -53,7 +53,7 @@ http://(app_root)/camera
 Robot
 -----
 
-run robot/robot.pde with [Arduino](http://arduino.cc/).
+run robot/robot.ino with [Arduino](http://arduino.cc/).
 
 
 Robot-Http-Server
