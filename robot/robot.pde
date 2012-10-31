@@ -11,7 +11,7 @@ int ledR = -1;
 int ledG = -1;
 int ledGtmp = -1;
 int spd=255; // 1~255の値にする
-int motor_delay = 3000; // モーターを動かす時間
+int motor_delay = 1000; // モーターを動かす時間
 
 void setup(){
   Serial.begin(4800);

@@ -7,4 +7,4 @@ CAMERA_SERVER=http://192.168.1.2:8784/
 mount_ramdisk && cp -R $SRC/camera/processing/simple_camera/application.macosx/simple_camera.app $RAM/kourin_camera.app
 open $RAM/kourin_camera.app &
 ruby $SRC/camera-server/uploader.rb -f $RAM/camera.jpg -u $CAMERA_SERVER -i 1 -loop &
-$SRC/robot-http-server/robot-http-server $SERIAL -bps 4800 -post_interval 3000 &
+$SRC/robot-http-server/robot-http-server $SERIAL -bps 4800 -post_interval 1500 &
