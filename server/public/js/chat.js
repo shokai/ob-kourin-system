@@ -19,7 +19,7 @@ $(function(){
             post();
         }
     });
-    timer_sync = setInterval(chat.load, 20000);
+    timer_sync = setInterval(chat.load, 10000);
     $('div#robot span.button#go').click(function(){robot_post('a')});
     $('div#robot span.button#left').click(function(){robot_post('c')});
     $('div#robot span.button#right').click(function(){robot_post('d')});
