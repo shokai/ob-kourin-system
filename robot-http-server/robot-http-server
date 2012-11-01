@@ -14,7 +14,7 @@ parser.comment(:bit, 'default : 8')
 parser.comment(:stopbit, 'default : 1')
 parser.comment(:parity, 'default : 0')
 parser.comment(:port, 'TCP Port - default : 8783')
-parser.comment(:post_interval, 'default : 1500 (ms)')
+parser.comment(:post_interval, 'default : 1000 (ms)')
 serial_device, @@params = parser.parse(ARGV)
 
 {
@@ -23,7 +23,7 @@ serial_device, @@params = parser.parse(ARGV)
   :stopbit => 1,
   :parity => 0,
   :port => 8783,
-  :post_interval => 3000
+  :post_interval => 1000
 }.each{|k,v|
   @@params[k] = v if @@params[k] == nil
 }
