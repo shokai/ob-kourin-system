@@ -91,14 +91,6 @@ EM::run do
     end
   end
 
-  EventMachine::defer do
-    loop do
-      line = gets.gsub(/[\r\n]/,'')
-      next if !line or line.to_s.size < 1
-      @@sp.puts line
-    end
-  end
-
   EventMachine::start_server("0.0.0.0", @@params[:port], Handler)
   puts "starting http server.."
   puts " => port #{@@params[:port]}"
